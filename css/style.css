@@ -1,59 +1,128 @@
+/*******************************************
+                GLOBAL STYLES
+*******************************************/
 * {
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 /*******************************************
 ROOT ELEMENT OF THE DOCUMENT (HTML ELEMENT)
-CSS VARIABLES 
+*********** CSS VARIABLES ***************** 
 *******************************************/
 :root {
+  /* COLORS */
   --header-color1: #31708e;
   --header-color2: #8fc1e3;
   --footer-color1: #8fc1e3;
   --footer-color2: #31708e;
   --main-font-color: Black;
-  --border-color1: #8fc1e3`;
-  --border-color2: blue;
+  --border-color1: #8fc1e3;
+  --border-color2: #31708e;
   --body-color: #f7f9fb;
+  --main-nav: #5085a5;
+  /* FONTS */
   --font1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font2: "Arial";
-  --main-nav: #5085a5;
 }
 body {
   background-color: var(--body-color);
   margin: 0;
 }
+/* #wrapper {
+  min-width: 300px;
+} */
 /*******************************************
-                HEADER
+              HEADER  
 *******************************************/
 #page-header {
   height: 200px;
-  background-image: linear-gradient(var(--header-color1), var(--header-color2));
+  background: linear-gradient(var(--header-color1), var(--header-color2));
 }
 /*******************************************
                 NAV
 *******************************************/
 #main-nav {
-  height: 70px;
+  display: flex;
+  /* height: 70px; */
   background-color: var(--main-nav);
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+  justify-content: space-between;
+  align-items: center;
 }
+#nav-left {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 30px;
+}
+#nav-left > ul {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+#nav-left li {
+  list-style-type: none;
+}
+#back-forward-btns {
+  display: flex;
+  justify-content: space-around;
+  width: 10%;
+}
+
+#main-nav a {
+  display: block;
+  padding: 5px;
+  background-color: #ca24a1;
+  text-decoration: none;
+  font-family: var(--font1);
+  line-height: 50px;
+}
+
+#nav-right {
+  padding: 15px;
+}
+
 /*******************************************
                 MAIN CONTENT
 *******************************************/
 #main-content {
-  height: 2000px;
   width: 90%;
   margin: 0 auto;
-  border: 2px solid var(--border-color1);
   color: var(--main-font-color);
   font-family: var(--font1);
 }
+.main-section {
+  border: 2px solid var(--border-color1);
+  height: 400px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
 /*******************************************
                 FOOTER
 *******************************************/
 #page-footer {
   height: 200px;
-  background-image: linear-gradient(var(--footer-color1), var(--footer-color2));
+  background: linear-gradient(var(--footer-color1), var(--footer-color2));
 }
+/*******************************************
+                MEDIA QUERIES
+*******************************************/
+/* CSS to be applied for a screen width up to 768px*/
+@media screen and (max-width: 768px) {
+  #main-content {
+    width: 98%;
+  }
+} /*end of 788px media query*/
+/* CSS to be applied for a screen width up to 300px*/
+@media screen and (max-width: 300px) {
+  #main-content {
+    width: 100%;
+  }
+} /*end of 300px media query*/
