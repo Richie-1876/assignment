@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!--Font awesome 4.7 CDN -->
     <link rel="stylesheet" href="css/style.css" />
+
     <title>Assignment |Richard Wright|</title>
   </head>
   <body>
@@ -14,11 +20,17 @@
       <nav id="main-nav">
         <div id="nav-left">
           <div id="back-forward-btns">
-            <a href="#">B</a>
-            <a href="#">F</a>
+            <a href="#" onclick="history.back();"
+              ><i class="fa fa-arrow-circle-o-left"></i
+            ></a>
+            <a href="#" onclick="history.forward();"
+              ><i class="fa fa-arrow-circle-o-right"></i
+            ></a>
           </div>
           <ul>
-            <li><a href="#">burger</a></li>
+            <li>
+              <a href="#"><i class="fa fa-bars"></i></a>
+            </li>
             <li><a href="#animation-section">Animation</a></li>
             <li><a href="#video-section">Video</a></li>
             <li><a href="#audio-section">Audio</a></li>
@@ -28,8 +40,34 @@
           </ul>
         </div>
         <!--end of nav-left-->
-        <div id="nav-right">
-          <a>*</a>
+        <div id="nav-right" onclick="togglePreferencePanel()">
+          <li>
+            <a><i class="fa fa-sliders"></i></a>
+          </li>
+          <div id="preference-panel">
+            <!-- Preference panel layout achieved using a table -->
+            <table>
+              <tr>
+                <td>Background color &nbsp;&nbsp;</td>
+                <td><input type="color" name="" id="body-color" /></td>
+              </tr>
+              <tr>
+                <td>Font color</td>
+                <td><input type="color" name="" id="font-color" /></td>
+              </tr>
+              <tr>
+                <td>Font size</td>
+                <td>
+                  <input type="range" min="10" max="32" value="16" id="" />
+                </td>
+              </tr>
+            </table>
+            <br />
+            <button>Save</button>
+            <button>Cancel</button>
+            <button>Reset to default</button>
+          </div>
+          <!--end of preference panel-->
         </div>
         <!--end of nav-right-->
       </nav>

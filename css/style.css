@@ -45,25 +45,28 @@ body {
 *******************************************/
 #main-nav {
   display: flex;
-  /* height: 70px; */
   background-color: var(--main-nav);
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
   justify-content: space-between;
-  align-items: center;
 }
 #nav-left {
   width: 80%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 30px;
+}
+/* Hide burger menu icon (first li in nav-left ul)
+Element:first-child is a sudo selector  */
+#nav-left ul li:first-child {
+  display: none;
 }
 #nav-left > ul {
   display: flex;
   justify-content: space-around;
   width: 90%;
+  /* margin: 0; */
 }
 #nav-left li {
   list-style-type: none;
@@ -76,15 +79,43 @@ body {
 
 #main-nav a {
   display: block;
-  padding: 5px;
-  background-color: #ca24a1;
+  padding: 5px 7px;
   text-decoration: none;
   font-family: var(--font1);
   line-height: 50px;
+  font-size: 30px;
+  transition: all 0.15s;
+}
+#main-nav a:hover {
+  color: #f7f9fb;
+  /* background-color: var(--header-color1); */
 }
 
-#nav-right {
+#nav-right li {
   padding: 15px;
+  list-style-type: none;
+}
+#nav-right {
+  position: relative;
+}
+#nav-right table,
+#nav-right td {
+  /* border: 2px solid white; */
+  border-collapse: collapse;
+  font-family: var(--font2);
+  color: white;
+}
+#nav-right td {
+  line-height: 40px;
+}
+#preference-panel {
+  position: absolute;
+  /* height: 200px;*/
+  width: 300px;
+  background-color: var(--main-nav);
+  right: 0;
+  padding: 10px;
+  display: none;
 }
 
 /*******************************************
@@ -119,10 +150,17 @@ body {
   #main-content {
     width: 98%;
   }
+  #back-forward-btns {
+    display: none;
+  }
 } /*end of 788px media query*/
 /* CSS to be applied for a screen width up to 300px*/
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 450px) {
   #main-content {
     width: 100%;
+  }
+  /* Display burger menu */
+  #nav-left ul li:first-child {
+    display: block;
   }
 } /*end of 300px media query*/
