@@ -82,6 +82,8 @@ Element:first-child is a sudo selector  */
   padding: 5px 7px;
   text-decoration: none;
   font-family: var(--font1);
+  /* Text-shadow example */
+  text-shadow: 1px 1px 2px #f2f3f4;
   line-height: 50px;
   font-size: 30px;
   transition: all 0.15s;
@@ -128,11 +130,15 @@ Element:first-child is a sudo selector  */
   font-family: var(--font1);
 }
 .main-section {
+  /* Border example */
   border: 2px solid var(--border-color1);
+  /* border radius example */
+  border-radius: 5px;
   height: 400px;
   padding: 20px;
   margin: 10px;
-  border-radius: 5px;
+  /* Box shadow example */
+  box-shadow: 10px 5px 5px #31708e;
 }
 
 /*******************************************
