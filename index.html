@@ -40,25 +40,35 @@
           </ul>
         </div>
         <!--end of nav-left-->
-        <div id="nav-right" onclick="togglePreferencePanel()">
+        <div id="nav-right">
           <li>
-            <a><i class="fa fa-sliders"></i></a>
+            <a
+              ><i class="fa fa-sliders" onclick="togglePreferencePanel()"></i
+            ></a>
           </li>
           <div id="preference-panel">
             <!-- Preference panel layout achieved using a table -->
             <table>
               <tr>
                 <td>Background color &nbsp;&nbsp;</td>
-                <td><input type="color" name="" id="body-color" /></td>
+                <td>
+                  <input type="color" name="" id="background-color-picker" />
+                </td>
               </tr>
               <tr>
                 <td>Font color</td>
-                <td><input type="color" name="" id="font-color" /></td>
+                <td><input type="color" name="" id="font-color-picker" /></td>
               </tr>
               <tr>
                 <td>Font size</td>
                 <td>
-                  <input type="range" min="10" max="32" value="16" id="" />
+                  <input
+                    type="range"
+                    min="10"
+                    max="32"
+                    value="16"
+                    id="font-range-slider"
+                  />
                 </td>
               </tr>
             </table>
