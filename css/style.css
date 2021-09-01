@@ -140,7 +140,70 @@ Element:first-child is a sudo selector  */
   /* Box shadow example */
   box-shadow: 10px 5px 5px #31708e;
 }
-
+/*******************************************
+          VIDEO SECTION
+*******************************************/
+#video-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
+}
+#youtube-embed {
+  width: 80%;
+  height: 1000px;
+  border-radius: 50px;
+}
+/*******************************************
+          CONTACT FORM SECTION
+*******************************************/
+#form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#contact-form {
+  height: 85%;
+  width: 80%;
+  padding: 10px;
+  border: 2px solid #31708e;
+  border-radius: 10px;
+  background-color: #8fc1e3;
+}
+#contact-form table td {
+  padding: 8px;
+}
+#contact-form table {
+  margin-bottom: 25px;
+}
+#form-btns {
+  display: flex;
+  justify-content: space-between;
+}
+.contact-btns {
+  width: 40%;
+  height: 25px;
+  box-shadow: 1px 1px 1px grey;
+}
+#submit-btn {
+  background-color: green;
+  color: #f7f9fb;
+}
+#reset-btn {
+  background-color: red;
+  color: #f7f9fb;
+}
+/*******************************************
+          LOCATION SECTION
+*******************************************/
+#location-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 /*******************************************
                 FOOTER
 *******************************************/

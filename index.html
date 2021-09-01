@@ -102,16 +102,125 @@
           </p>
         </section>
         <!--end of animation section-->
-        <section id="video-section" class="main-section"></section>
+        <section id="video-section" class="main-section">
+          <h2>VIDEO</h2>
+          <iframe
+            id="youtube-embed"
+            src="https://www.youtube.com/embed/tgbNymZ7vqY"
+          >
+          </iframe>
+        </section>
         <!--end of video section-->
         <section id="audio-section" class="main-section"></section>
         <!--end of audio section-->
         <section id="gallery-section" class="main-section"></section>
         <!--end of gallery section-->
-        <section id="form-section" class="main-section"></section>
+        <section id="form-section" class="main-section">
+          <h2>Contact Form</h2>
+          <form id="contact-form">
+            <table>
+              <tr>
+                <td>Name:</td>
+                <td>
+                  <input type="text" name="name" id="contact-form-name" />
+                </td>
+              </tr>
+              <tr>
+                <td>Age:</td>
+                <td>
+                  <input
+                    type="number"
+                    name="age"
+                    id="contact-form-age"
+                    min="1"
+                    max="125"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>DOB:</td>
+                <td><input type="date" name="date" id="contact-form-dob" /></td>
+              </tr>
+              <tr>
+                <td>Gender:</td>
+                <td>
+                  <label for="gender_0"
+                    ><input
+                      type="radio"
+                      name="gender"
+                      id="contact-form-gender_0"
+                    />Male</label
+                  >
+                  <label for="gender_1"
+                    ><input
+                      type="radio"
+                      name="gender"
+                      id="contact-form-gender_1"
+                    />Female</label
+                  >
+                </td>
+              </tr>
+              <tr>
+                <!-- Checkboxes input -->
+                <td>Interests:</td>
+                <td>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value="checkbox"
+                      id="contact-form-interests_0"
+                    />
+                    TV Shows</label
+                  >
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value="checkbox"
+                      id="contact-form-interests_1"
+                    />
+                    News</label
+                  >
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value="checkbox"
+                      id="contact-form-interests_2"
+                    />
+                    Sports</label
+                  >
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value="checkbox"
+                      id="contact-form-interests_3"
+                    />
+                    Movies</label
+                  >
+                </td>
+              </tr>
+            </table>
+            <div id="form-btns">
+              <td>
+                <input
+                  id="submit-btn"
+                  class="contact-btns"
+                  type="submit"
+                  value="Submit"
+                />
+              </td>
+              <td>
+                <input type="reset" id="reset-btn" class="contact-btns" />
+              </td>
+            </div>
+          </form>
+        </section>
         <!--end of form section-->
         <section id="location-section" class="main-section"></section>
-        <!--end of form section-->
+        <!--end of location section-->
       </main>
       <!--end of main-content-->
       <footer id="page-footer"></footer>

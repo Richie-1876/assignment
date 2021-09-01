@@ -4,6 +4,17 @@
 var panel = document.getElementById("preference-panel");
 var main = document.getElementById("main-content");
 
+//Form Inputs
+// var formName = document.getElementById("contact-form-name");
+// var formAge = document.getElementById("contact-form-age");
+// var formDob = document.getElementById("contact-form-dob");
+// var formGender0 = document.getElementById("contact-form-gender_0");
+// var formGender1 = document.getElementById("contact-form-gender_1");
+// var formInterests0 = document.getElementById("contact-form-interests_0");
+// var formInterests1 = document.getElementById("contact-form-interests_1");
+// var formInterests2 = document.getElementById("contact-form-interests_2");
+// var formInterests3 = document.getElementById("contact-form-interests_3");
+
 /////////////////////////////////////////
 //         EVENT LISTENERS
 /////////////////////////////////////////
