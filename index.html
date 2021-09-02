@@ -15,7 +15,9 @@
   </head>
   <body>
     <div id="wrapper">
-      <header id="page-header"></header>
+      <header id="page-header">
+        <h1>ePortfolio</h1>
+      </header>
       <!--end of page-header-->
       <nav id="main-nav">
         <div id="nav-left">
@@ -73,9 +75,9 @@
               </tr>
             </table>
             <br />
-            <button>Save</button>
-            <button>Cancel</button>
-            <button>Reset to default</button>
+            <button id="prefs-save-btn">Save</button>
+            <button id="prefs-cancel-btn">Cancel</button>
+            <button id="prefs-reset-defaults-btn">Reset to default</button>
             <!--For testing preferences panel - changing preferences -->
             <br />
             <button id="test-btn">test</button>
@@ -122,7 +124,23 @@
               <tr>
                 <td>Name:</td>
                 <td>
-                  <input type="text" name="name" id="contact-form-name" />
+                  <input
+                    type="text"
+                    name="name"
+                    id="contact-form-name"
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>
+                  <input
+                    type="email"
+                    name="email"
+                    id="contact-form-email"
+                    required
+                  />
                 </td>
               </tr>
               <tr>
@@ -134,12 +152,20 @@
                     id="contact-form-age"
                     min="1"
                     max="125"
+                    required
                   />
                 </td>
               </tr>
               <tr>
                 <td>DOB:</td>
-                <td><input type="date" name="date" id="contact-form-dob" /></td>
+                <td>
+                  <input
+                    type="date"
+                    name="date"
+                    id="contact-form-dob"
+                    required
+                  />
+                </td>
               </tr>
               <tr>
                 <td>Gender:</td>
@@ -149,6 +175,7 @@
                       type="radio"
                       name="gender"
                       id="contact-form-gender_0"
+                      required
                     />Male</label
                   >
                   <label for="gender_1"
@@ -205,7 +232,11 @@
               <tr>
                 <td>Message:</td>
                 <td>
-                  <textarea name="message" id="contact-form-message"></textarea>
+                  <textarea
+                    name="message"
+                    id="contact-form-message"
+                    required
+                  ></textarea>
                 </td>
               </tr>
             </table>
@@ -233,6 +264,8 @@
       <!--end of main-footer-->
     </div>
     <!-- end of wrapper -->
+    <script src="js/rgbToHex.js"></script>
+    <!-- utility function for converting rgb values to hex values -->
     <script src="js/app.js"></script>
   </body>
 </html>

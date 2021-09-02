@@ -17,7 +17,7 @@ ROOT ELEMENT OF THE DOCUMENT (HTML ELEMENT)
   --header-color2: #8fc1e3;
   --footer-color1: #8fc1e3;
   --footer-color2: #31708e;
-  --main-font-color: Black;
+  --main-font-color: rgb(2, 2, 2);
   --border-color1: #8fc1e3;
   --border-color2: #31708e;
   --body-color: #31708e;
@@ -30,15 +30,18 @@ body {
   background-color: var(--body-color);
   margin: 0;
 }
-/* #wrapper {
+#wrapper {
   min-width: 300px;
-} */
+}
 /*******************************************
               HEADER  
 *******************************************/
 #page-header {
   height: 100px;
   background: linear-gradient(var(--header-color1), var(--header-color2));
+  display: flex;
+  align-items: center;
+  color: #f7f9fb;
 }
 /*******************************************
                 NAV
@@ -123,10 +126,10 @@ Element:first-child is a sudo selector  */
 /*******************************************
                 MAIN CONTENT
 *******************************************/
-#wrapper {
+/* #wrapper {
   width: 90%;
   margin: 0 auto;
-}
+} */
 #main-content {
   width: 90%;
   margin: 0 auto;
@@ -143,6 +146,9 @@ Element:first-child is a sudo selector  */
   margin: 20px;
   /* Box shadow example */
   box-shadow: 10px 5px 5px #31708e;
+}
+main section {
+  background-color: var(--border-color2);
 }
 /*******************************************
           VIDEO SECTION
@@ -200,6 +206,10 @@ Element:first-child is a sudo selector  */
   background-color: red;
   color: #f7f9fb;
 }
+/* input[type="text"] {
+  border: none;
+  border-bottom: 2px solid red;
+} */
 /*******************************************
           LOCATION SECTION
 *******************************************/
@@ -221,9 +231,9 @@ Element:first-child is a sudo selector  */
 *******************************************/
 /* CSS to be applied for a screen width up to 768px*/
 @media screen and (max-width: 768px) {
-  #wrapper {
+  /* #wrapper {
     width: 100%;
-  }
+  } */
   #main-content {
     width: 98%;
   }

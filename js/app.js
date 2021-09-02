@@ -1,35 +1,64 @@
 /////////////////////////////////////////
 //         GET ELEMENTS
 /////////////////////////////////////////
-var main = document.getElementById("main-content");
-var panel = document.getElementById("preference-panel");
-var bgColorPicker = document.getElementById("background-color-picker");
-var fontColorPicker = document.getElementById("font-color-picker");
-var fontSizeSlider = document.getElementById("font-range-slider");
-var sliderDisplay = document.getElementById("slider-displayed-font-size");
-var sections = main.getElementsByTagName("section");
-
-//Form Inputs
-// var formName = document.getElementById("contact-form-name");
-// var formAge = document.getElementById("contact-form-age");
-// var formDob = document.getElementById("contact-form-dob");
-// var formGender0 = document.getElementById("contact-form-gender_0");
-// var formGender1 = document.getElementById("contact-form-gender_1");
-// var formInterests0 = document.getElementById("contact-form-interests_0");
-// var formInterests1 = document.getElementById("contact-form-interests_1");
-// var formInterests2 = document.getElementById("contact-form-interests_2");
-// var formInterests3 = document.getElementById("contact-form-interests_3");
+let main = document.getElementById("main-content");
+let sections = main.getElementsByTagName("section");
+// PREFERENCE PANEL ELEMENTS
+let panel = document.getElementById("preference-panel");
+let bgColorPicker = document.getElementById("background-color-picker");
+let fontColorPicker = document.getElementById("font-color-picker");
+let fontSizeSlider = document.getElementById("font-range-slider");
+let sliderDisplay = document.getElementById("slider-displayed-font-size");
+// PREFERENCE PANEL BUTTONS
+let prefsResetDefaults = document.getElementById("prefs-reset-defaults-btn");
+let prefsSaveButton = document.getElementById("prefs-save-btn");
+let prefsCancelButton = document.getElementById("prefs-cancel-btn");
+// CONTACT SECTION ELEMENTS
+let checkBoxes = document.getElementsByName("interests");
+// TEST BUTTON
+let testBtn = document.getElementById("test-btn");
 
 /////////////////////////////////////////
 //         EVENT LISTENERS
 /////////////////////////////////////////
+//<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
+//<<<<<<<<<<<<< CLICK >>>>>>>>>>>>>>>>>>//
+//<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
+// Event Listener (click) for test button
+testBtn.addEventListener("click", () => {
+  applyPreferences(testPreferences);
+  // console.log(confirmAtLeast1InterestChecked());
+});
 
-// Event listener for change events on fontSizeSlider element.
+// Event listener (click) for reset default button.
+prefsResetDefaults.addEventListener("click", () => {
+  if (localStorage["defaults"] != null) {
+    // apply the preferences to the page
+    applyPreferences(getPreferences("defaults"));
+    // set the values in the preferences panel
+    setPreferencePanelValues(getPreferences("defaults"));
+    setPreferencePanelDisplayedFontSize();
+  } else {
+    console.log(
+      "Cannot reset defaults as no default preferences were found in local storage"
+    );
+  }
+});
+// Event listener (click) for prefs save button.
+prefsSaveButton.addEventListener("click", () => {
+  // let userPreferences = getPreferencePanelValues();
+  savePreferences(getPreferencePanelValues(), "userPreferences");
+});
+//<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
+//<<<<<<<<<<<<< CHANGE >>>>>>>>>>>>>>>>>//
+//<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
+
+// Event listener (change) for fontSizeSlider element.
 fontSizeSlider.addEventListener("change", (e) => {
   setPreferencePanelDisplayedFontSize();
 });
 
-// Event listener for change events for any element within the preferences panel
+// Event listener (change) for any element within the preferences panel
 panel.addEventListener("change", () => {
   applyPreferences(getPreferencePanelValues());
 });
@@ -43,16 +72,51 @@ panel.addEventListener("change", () => {
  * Parameters: (0)
  ****************************************/
 window.onload = function () {
+  //Defaults preferences object
+  let defaults = {
+    backgroundColor: RGBToHex(getComputedStyle(sections[0]).backgroundColor),
+    fontSize: parseInt(getComputedStyle(main).fontSize),
+    color: RGBToHex(getComputedStyle(main).color),
+  };
+  //save the defaults to local storage
+  savePreferences(defaults, "defaults");
+
+  // if we have user preferences in local storage apply them and set values of the inputs in the pref panel.
+  if (localStorage["userPreferences"] != null) {
+    applyPreferences(getPreferences("userPreferences"));
+    // set the values in the preferences panel
+    setPreferencePanelValues(getPreferences("userPreferences"));
+    setPreferencePanelDisplayedFontSize();
+  } else {
+    console.log("Window onLoad: No user preferences found in local storage");
+  }
+
   setPreferencePanelDisplayedFontSize();
 };
 
 /////////////////////////////////////////
+// Function to set values of the color
+// Pickers and range in Prefs panel
+/////////////////////////////////////////
+/****************************************
+ * Name: setPreferencePanelValues()
+ * Purpose:
+ * Parameters: (1) preferences Object
+ * Returns: no return value
+ ****************************************/
+function setPreferencePanelValues(preferences) {
+  bgColorPicker.value = preferences.backgroundColor;
+  fontColorPicker.value = preferences.color;
+  fontSizeSlider.value = preferences.fontSize;
+}
+
+/////////////////////////////////////////
 //    Preference object for testing
 /////////////////////////////////////////
-var testPreferences = {
-  backgroundColor: "blue",
+let testPreferences = {
+  backgroundColor: "#0000FF",
   fontSize: "22",
-  color: "magenta",
+  color: "#FF00FF",
 };
 
 //////////////////////////////////////////////////
@@ -105,8 +169,7 @@ function setPreferencePanelDisplayedFontSize() {
 
 function togglePreferencePanel() {
   //get css style declaration object of the current computed styling of the element.
-  var panelStyle = getComputedStyle(panel);
-
+  let panelStyle = getComputedStyle(panel);
   if (panelStyle.display == "none") {
     panel.style.display = "block";
   } else {
@@ -145,18 +208,7 @@ function applyPreferences(preferences) {
     console.log("no key of fontSize found in preferences object");
   }
 }
-/////////////////////////////////////////
-//   Add eventListener to text button
-/////////////////////////////////////////
-/************************************
- * call the setPreferences function on
- * click of the test button in the preferences panel
- *************************************/
-let testBtn = document
-  .getElementById("test-btn")
-  .addEventListener("click", () => {
-    applyPreferences(testPreferences);
-  });
+
 ////////////////////////////////////////////////
 // Function to save preferences object in local storage
 ////////////////////////////////////////////////
@@ -173,7 +225,7 @@ let testBtn = document
  * Returns: No return value.
  ****************************************/
 function savePreferences(preferences, keyName) {
-  var preferencesJSONstring = JSON.stringify(preferences);
+  let preferencesJSONstring = JSON.stringify(preferences);
   localStorage.setItem(keyName, preferencesJSONstring);
 }
 ////////////////////////////////////////////////
@@ -206,5 +258,25 @@ function getPreferences(keyName) {
 // Test of the savePreferences Function with testPreferences
 ////////////////////////////////////////////////
 // savePreferences(testPreferences, "testSettings");
-var fetchedSettings = getPreferences("testSettings");
-console.log(fetchedSettings);
+let fetchedSettings = getPreferences("testSettings");
+// console.log(fetchedSettings);
+
+/////////////////////////////////////////
+// Function To confirm if at least 1 checkbox
+// has been checked
+/////////////////////////////////////////
+/****************************************
+ * Name: confirmAtLeast1InterestChecked()
+ * Purpose: confirm if at least 1 checkbox
+ *          has been checked
+ * Parameters: (0)
+ * Returns: BOOLEAN
+ ****************************************/
+function confirmAtLeast1InterestChecked() {
+  for (let checkbox of checkBoxes) {
+    if (checkbox.checked) {
+      return true;
+    }
+  }
+  return false;
+}
