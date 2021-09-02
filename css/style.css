@@ -20,7 +20,7 @@ ROOT ELEMENT OF THE DOCUMENT (HTML ELEMENT)
   --main-font-color: Black;
   --border-color1: #8fc1e3;
   --border-color2: #31708e;
-  --body-color: #f7f9fb;
+  --body-color: #31708e;
   --main-nav: #5085a5;
   /* FONTS */
   --font1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -37,7 +37,7 @@ body {
               HEADER  
 *******************************************/
 #page-header {
-  height: 200px;
+  height: 100px;
   background: linear-gradient(var(--header-color1), var(--header-color2));
 }
 /*******************************************
@@ -123,6 +123,10 @@ Element:first-child is a sudo selector  */
 /*******************************************
                 MAIN CONTENT
 *******************************************/
+#wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
 #main-content {
   width: 90%;
   margin: 0 auto;
@@ -136,7 +140,7 @@ Element:first-child is a sudo selector  */
   border-radius: 5px;
   height: 400px;
   padding: 20px;
-  margin: 10px;
+  margin: 20px;
   /* Box shadow example */
   box-shadow: 10px 5px 5px #31708e;
 }
@@ -163,10 +167,11 @@ Element:first-child is a sudo selector  */
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  height: 35vh;
 }
 #contact-form {
   height: 85%;
-  width: 80%;
+  width: 85%;
   padding: 10px;
   border: 2px solid #31708e;
   border-radius: 10px;
@@ -208,7 +213,7 @@ Element:first-child is a sudo selector  */
                 FOOTER
 *******************************************/
 #page-footer {
-  height: 200px;
+  height: 100px;
   background: linear-gradient(var(--footer-color1), var(--footer-color2));
 }
 /*******************************************
@@ -216,9 +221,13 @@ Element:first-child is a sudo selector  */
 *******************************************/
 /* CSS to be applied for a screen width up to 768px*/
 @media screen and (max-width: 768px) {
+  #wrapper {
+    width: 100%;
+  }
   #main-content {
     width: 98%;
   }
+
   #back-forward-btns {
     display: none;
   }

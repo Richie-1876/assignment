@@ -1,8 +1,13 @@
 /////////////////////////////////////////
 //         GET ELEMENTS
 /////////////////////////////////////////
-var panel = document.getElementById("preference-panel");
 var main = document.getElementById("main-content");
+var panel = document.getElementById("preference-panel");
+var bgColorPicker = document.getElementById("background-color-picker");
+var fontColorPicker = document.getElementById("font-color-picker");
+var fontSizeSlider = document.getElementById("font-range-slider");
+var sliderDisplay = document.getElementById("slider-displayed-font-size");
+var sections = main.getElementsByTagName("section");
 
 //Form Inputs
 // var formName = document.getElementById("contact-form-name");
@@ -18,33 +23,84 @@ var main = document.getElementById("main-content");
 /////////////////////////////////////////
 //         EVENT LISTENERS
 /////////////////////////////////////////
-document
-  .getElementById("background-color-picker")
-  .addEventListener("change", (e) => {
-    console.log("Background color picker changed", `value: ${e.target.value}`);
-  });
-document.getElementById("font-color-picker").addEventListener("change", (e) => {
-  console.log("Font color picker changed", `value: ${e.target.value}`);
+
+// Event listener for change events on fontSizeSlider element.
+fontSizeSlider.addEventListener("change", (e) => {
+  setPreferencePanelDisplayedFontSize();
 });
-document.getElementById("font-range-slider").addEventListener("change", (e) => {
-  console.log("Font size value changed", `value: ${e.target.value}`);
+
+// Event listener for change events for any element within the preferences panel
+panel.addEventListener("change", () => {
+  applyPreferences(getPreferencePanelValues());
 });
-/////////////////////////////////////////
-//      Function to update displayed font
-//      size in preference panel
-/////////////////////////////////////////
-/****************************************
- *
- ****************************************/
 
 /////////////////////////////////////////
-//         TOGGLE THE DISPLAY
-//         OF USER PREFERENCES PANEL
+//        WINDOW ONLOAD
+/////////////////////////////////////////
+/****************************************
+ * Name: Anonymous
+ * Purpose: Run specified code when the page is fully loaded
+ * Parameters: (0)
+ ****************************************/
+window.onload = function () {
+  setPreferencePanelDisplayedFontSize();
+};
+
+/////////////////////////////////////////
+//    Preference object for testing
+/////////////////////////////////////////
+var testPreferences = {
+  backgroundColor: "blue",
+  fontSize: "22",
+  color: "magenta",
+};
+
+//////////////////////////////////////////////////
+// Function to get values of all pref panel inputs
+//////////////////////////////////////////////////
+/*************************************************
+ * Name: getPreferencePanelValues()
+ * Purpose: generate a preferences object from the preference panel values.
+ * Params: (0)
+ * returns: A preference object - {
+ *   backgroundColor: "VALUE",
+ *   fontSize: "VALUE",
+ *   color: "VALUE",
+ * }
+ ************************************************/
+function getPreferencePanelValues() {
+  return {
+    backgroundColor: bgColorPicker.value,
+    fontSize: fontSizeSlider.value,
+    color: fontColorPicker.value,
+  };
+}
+
+/////////////////////////////////////////
+// Function to update displayed font
+// size in preference panel
+/////////////////////////////////////////
+/****************************************
+ * Name: setPreferencePanelDisplayedFontSize()
+ * purpose:
+ *  - get the value of the font-range-slider
+ *  - update innerText of slider-displayed-font-size element <td>
+ * Parameters: (0)
+ * returns: No return value.
+ ****************************************/
+function setPreferencePanelDisplayedFontSize() {
+  sliderDisplay.innerText = `Font size ${fontSizeSlider.value}px`;
+}
+
+/////////////////////////////////////////
+// FUNCTION TO TOGGLE THE DISPLAY
+//   OF USER PREFERENCES PANEL
 /////////////////////////////////////////
 /****************************************
  * Name: togglePreferencePanel()
- * Purpose: toggle between display block an display none
+ * Purpose: toggle between display block and display none
  * Parameters: (0)
+ * returns: No return Value.
  ****************************************/
 
 function togglePreferencePanel() {
@@ -57,49 +113,35 @@ function togglePreferencePanel() {
     panel.style.display = "none";
   }
 }
-/////////////////////////////////////////
-//    Preference object for testing
-/////////////////////////////////////////
-var testPreferences = {
-  backgroundColor: "blue",
-  fontSize: "22px",
-  color: "magenta",
-};
 
 /////////////////////////////////////////
 //    Function to set preferences
 /////////////////////////////////////////
 /****************************************
- * Name: setPreferences()
- * Purpose: Set the <main> font size and color, <main> Background-color
+ * Name: applyPreferences()
+ * Purpose: Set the <main> font size and color, <section> elements inside <main> Background-color
  * Parameters: (1) name: preferences type: Object
  ****************************************/
 
-function setPreferences(preferences) {
-  // if the key of backgroundColor is present in the object - set the background color to its value
+function applyPreferences(preferences) {
   if (preferences.backgroundColor != undefined) {
-    main.style.backgroundColor = preferences.backgroundColor;
-  }
-  // Otherwise log "no key of backgroundColor found in preferences object"
-  else {
+    // iterate through each element in the sections collection and set its backgroundColor to the preferences object backgroundColor.
+    for (const section of sections) {
+      section.style.backgroundColor = preferences.backgroundColor;
+    }
+  } else {
     console.log("no key of backgroundColor found in preferences object");
   }
-  // if the key of color is present in the object - set the color in <main> to its value
 
   if (preferences.color != undefined) {
     main.style.color = preferences.color;
-  }
-  // Otherwise log "no key of color found in preferences object"
-  else {
+  } else {
     console.log("no key of color found in preferences object");
   }
-  // if the key of fontSize is present in the object - set the fontsize in <main> to its value
 
   if (preferences.fontSize != undefined) {
-    main.style.fontSize = preferences.fontSize;
-  }
-  // Otherwise log "no key of fontSize found in preferences object"
-  else {
+    main.style.fontSize = `${preferences.fontSize}px`;
+  } else {
     console.log("no key of fontSize found in preferences object");
   }
 }
@@ -113,7 +155,7 @@ function setPreferences(preferences) {
 let testBtn = document
   .getElementById("test-btn")
   .addEventListener("click", () => {
-    setPreferences(testPreferences);
+    applyPreferences(testPreferences);
   });
 ////////////////////////////////////////////////
 // Function to save preferences object in local storage
@@ -128,6 +170,7 @@ let testBtn = document
  * backgroundColor: "VALUE",
  * fontSize: "VALUE",
  * color: "VALUE",
+ * Returns: No return value.
  ****************************************/
 function savePreferences(preferences, keyName) {
   var preferencesJSONstring = JSON.stringify(preferences);
@@ -145,6 +188,7 @@ function savePreferences(preferences, keyName) {
  *   - If it exists returns the preferences object.
  *   - Otherwise return null
  * Parameters: (1) keyName(string)
+ * returns: preferences object OR null.
  ****************************************/
 function getPreferences(keyName) {
   if (localStorage[keyName] != undefined) {
