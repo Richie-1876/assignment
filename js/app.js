@@ -16,19 +16,46 @@ let prefsCancelButton = document.getElementById("prefs-cancel-btn");
 // CONTACT SECTION ELEMENTS
 let checkBoxes = document.getElementsByName("interests");
 // TEST BUTTON
-let testBtn = document.getElementById("test-btn");
-
+// let testBtn = document.getElementById("test-btn");
+// USERNAME SECTION ELEMENTS
+let usernameDisplay = document.getElementById("username");
+let resetUsernameBtn = document.getElementById("reset-username-btn");
+//ANIMATION ELEMENTS
+let animationStartBtn = document.getElementById("animation-start-btn");
+let animationPauseBtn = document.getElementById("animation-pause-btn");
+let animationTarget = document.getElementById("animation-target");
+let animationSpeedSlider = document.getElementById("animation-speed-slider");
+let animationDurationDisplay = document.getElementById(
+  "animation-duration-display"
+);
 /////////////////////////////////////////
 //         EVENT LISTENERS
 /////////////////////////////////////////
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
 //<<<<<<<<<<<<< CLICK >>>>>>>>>>>>>>>>>>//
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
-// Event Listener (click) for test button
-testBtn.addEventListener("click", () => {
-  applyPreferences(testPreferences);
-  // console.log(confirmAtLeast1InterestChecked());
+animationStartBtn.addEventListener("click", () => {
+  animationTarget.style.animationPlayState = "running";
 });
+animationPauseBtn.addEventListener("click", () => {
+  animationTarget.style.animationPlayState = "paused";
+});
+
+resetUsernameBtn.addEventListener("click", () => {
+  //prompt the user
+  let username = prompt("Ok, What can I call you then?");
+  //save response to local storage
+  saveUsernameToLocalStorage(username);
+  //display value stored in local storage
+  usernameDisplay.textContent = localStorage.username;
+  togglePreferencePanel();
+});
+
+// Event Listener (click) for test button
+// testBtn.addEventListener("click", () => {
+//   applyPreferences(testPreferences);
+//   // console.log(confirmAtLeast1InterestChecked());
+// });
 
 // Event listener (click) for reset default button.
 prefsResetDefaults.addEventListener("click", () => {
@@ -57,7 +84,10 @@ prefsCancelButton.addEventListener("click", () => {
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
 //<<<<<<<<<<<<< CHANGE >>>>>>>>>>>>>>>>>//
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
-
+animationSpeedSlider.addEventListener("change", (e) => {
+  animationTarget.style.animationDuration = `${e.target.value}s`;
+  animationDurationDisplay.innerHTML = `${e.target.value}s`;
+});
 // Event listener (change) for fontSizeSlider element.
 fontSizeSlider.addEventListener("change", (e) => {
   setPreferencePanelDisplayedFontSize();
@@ -77,7 +107,7 @@ panel.addEventListener("change", () => {
  * Parameters: (0)
  ****************************************/
 window.onload = function () {
-  //Defaults preferences object
+  //****** Defaults preferences object *******//
   let defaults = {
     backgroundColor: RGBToHex(getComputedStyle(sections[0]).backgroundColor),
     fontSize: parseInt(getComputedStyle(main).fontSize),
@@ -85,7 +115,7 @@ window.onload = function () {
   };
   //save the defaults to local storage
   savePreferences(defaults, "defaults");
-
+  //****** APPLY PREFERENCES *******//
   // if we have user preferences in local storage apply them and set values of the inputs in the pref panel.
   if (localStorage["userPreferences"] != null) {
     applyPreferences(getPreferences("userPreferences"));
@@ -93,8 +123,35 @@ window.onload = function () {
     console.log("Window onLoad: No user preferences found in local storage");
     setPreferencePanelValues(getPreferences("defaults"));
   }
-};
 
+  //****** USERNAME *******//
+  //Check if a username is present in local storage
+  if (localStorage.username === undefined) {
+    //if its not present prompt the user.
+    let username = prompt("Welcome, What can I call you?");
+    saveUsernameToLocalStorage(username);
+  }
+  // set username display to display whats in local storage
+  usernameDisplay.textContent = localStorage.username;
+  animationDurationDisplay.innerHTML = `${animationSpeedSlider.value}s`;
+};
+/////////////////////////////////////////
+// Function to save and display Username
+/////////////////////////////////////////
+/****************************************
+ * Name: saveAndDisplayUsername()
+ * Purpose: Save username to local storage and display it.
+ * Parameters: (1) username(string)
+ * Returns: no return value
+ ****************************************/
+function saveUsernameToLocalStorage(username) {
+  // username is not null
+  if (username) {
+    localStorage.setItem("username", username);
+  } else {
+    localStorage.setItem("username", "None of your bees wax!!!");
+  }
+}
 /////////////////////////////////////////
 // Function to set values of the color
 // Pickers and range in Prefs panel

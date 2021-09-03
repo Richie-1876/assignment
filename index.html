@@ -76,12 +76,19 @@
               </tr>
             </table>
             <br />
-            <button id="prefs-save-btn">Save</button>
-            <button id="prefs-cancel-btn">Cancel</button>
-            <button id="prefs-reset-defaults-btn">Reset to default</button>
+            <button id="prefs-save-btn" class="general-btns">Save</button>
+            <button id="prefs-cancel-btn" class="general-btns">Cancel</button>
+            <button id="prefs-reset-defaults-btn" class="general-btns">
+              Reset to default
+            </button>
             <!--For testing preferences panel - changing preferences -->
+            <!-- <br />
+            <button id="test-btn">test</button> -->
+
             <br />
-            <button id="test-btn">test</button>
+            <button id="reset-username-btn" class="general-btns">
+              Reset Username
+            </button>
           </div>
           <!--end of preference panel-->
         </div>
@@ -89,34 +96,72 @@
       </nav>
       <!--end of main-nav-->
       <main id="main-content">
+        <section id="username-section" class="main-section">
+          <h2>Welcome: <span id="username"></span></h2>
+        </section>
         <!-- 1em -->
         <section id="animation-section" class="main-section">
-          <h1>Heading 1</h1>
-          <h2>Heading 2</h2>
-          <h3>Heading 3</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            asperiores in esse repellendus voluptate sit, similique dolor
-            dolorem aperiam eos! Aliquid numquam impedit quos incidunt? Laborum
-            numquam nam maiores nobis? Sint est dolore ea porro magni harum
-            nesciunt nostrum. Vero impedit natus, modi consequatur excepturi
-            odit atque est esse ea, autem vitae molestias neque fugiat, corporis
-            earum? Velit, in ducimus.
-          </p>
+          <h2>Animation</h2>
+          <p>TODO Explain how the animation works</p>
+          <br />
+          <br />
+          <div id="animation-area">
+            <div id="animation-target"></div>
+          </div>
+          <br />
+          <div id="animation-controls">
+            <button
+              id="animation-start-btn"
+              class="general-btns animation-btns"
+            >
+              Start
+            </button>
+            <button
+              id="animation-pause-btn"
+              class="general-btns animation-btns"
+            >
+              Pause
+            </button>
+            <div>
+              <input
+                type="range"
+                id="animation-speed-slider"
+                min="1"
+                max="5"
+                value="2"
+              />
+              <span id="animation-duration-display"></span>
+            </div>
+          </div>
         </section>
         <!--end of animation section-->
         <section id="video-section" class="main-section">
           <h2>VIDEO</h2>
-          <iframe
-            id="youtube-embed"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY"
-          >
-          </iframe>
+          <div id="youtube-video-container">
+            <h2>YouTube Hosted Video</h2>
+            <iframe
+              id="youtube-embed"
+              src="https://www.youtube.com/embed/tgbNymZ7vqY"
+            >
+            </iframe>
+          </div>
+          <div id="hosted-video-container">
+            <h2>Locally Hosted Video</h2>
+            <video controls id="hosted-vid">
+              <source src="video/mov_bbb.mp4" type="video/mp4" />
+              <!-- <source src="video/mov_bbb.mov" type="video/mov"> -->
+              This browser does not support HTML5 video
+            </video>
+          </div>
         </section>
         <!--end of video section-->
-        <section id="audio-section" class="main-section"></section>
+        <section id="audio-section" class="main-section">
+          <h2>Audio</h2>
+        </section>
         <!--end of audio section-->
-        <section id="gallery-section" class="main-section"></section>
+        <section id="gallery-section" class="main-section">
+          <h2>Gallery</h2>
+        </section>
         <!--end of gallery section-->
         <section id="form-section" class="main-section">
           <h2>Contact Form</h2>
@@ -208,7 +253,7 @@
                       value="checkbox"
                       id="contact-form-interests_1"
                     />
-                    News</label
+                    Movies</label
                   >
                   <label>
                     <input
@@ -217,16 +262,7 @@
                       value="checkbox"
                       id="contact-form-interests_2"
                     />
-                    Sports</label
-                  >
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="interests"
-                      value="checkbox"
-                      id="contact-form-interests_3"
-                    />
-                    Movies</label
+                    Other</label
                   >
                 </td>
               </tr>
@@ -257,11 +293,15 @@
           </form>
         </section>
         <!--end of form section-->
-        <section id="location-section" class="main-section"></section>
+        <section id="location-section" class="main-section">
+          <h2>Location</h2>
+        </section>
         <!--end of location section-->
       </main>
       <!--end of main-content-->
-      <footer id="page-footer"></footer>
+      <footer id="page-footer">
+        <h3>Copyright &copy Richard Wright</h3>
+      </footer>
       <!--end of main-footer-->
     </div>
     <!-- end of wrapper -->
