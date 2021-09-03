@@ -35,9 +35,6 @@ prefsResetDefaults.addEventListener("click", () => {
   if (localStorage["defaults"] != null) {
     // apply the preferences to the page
     applyPreferences(getPreferences("defaults"));
-    // set the values in the preferences panel
-    setPreferencePanelValues(getPreferences("defaults"));
-    setPreferencePanelDisplayedFontSize();
   } else {
     console.log(
       "Cannot reset defaults as no default preferences were found in local storage"
@@ -48,6 +45,14 @@ prefsResetDefaults.addEventListener("click", () => {
 prefsSaveButton.addEventListener("click", () => {
   // let userPreferences = getPreferencePanelValues();
   savePreferences(getPreferencePanelValues(), "userPreferences");
+});
+
+prefsCancelButton.addEventListener("click", () => {
+  if (localStorage["userPreferences"]) {
+    applyPreferences(getPreferences("userPreferences"));
+  } else {
+    applyPreferences(getPreferences("defaults"));
+  }
 });
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
 //<<<<<<<<<<<<< CHANGE >>>>>>>>>>>>>>>>>//
@@ -84,14 +89,10 @@ window.onload = function () {
   // if we have user preferences in local storage apply them and set values of the inputs in the pref panel.
   if (localStorage["userPreferences"] != null) {
     applyPreferences(getPreferences("userPreferences"));
-    // set the values in the preferences panel
-    setPreferencePanelValues(getPreferences("userPreferences"));
-    setPreferencePanelDisplayedFontSize();
   } else {
     console.log("Window onLoad: No user preferences found in local storage");
+    setPreferencePanelValues(getPreferences("defaults"));
   }
-
-  setPreferencePanelDisplayedFontSize();
 };
 
 /////////////////////////////////////////
@@ -108,6 +109,7 @@ function setPreferencePanelValues(preferences) {
   bgColorPicker.value = preferences.backgroundColor;
   fontColorPicker.value = preferences.color;
   fontSizeSlider.value = preferences.fontSize;
+  setPreferencePanelDisplayedFontSize();
 }
 
 /////////////////////////////////////////
@@ -207,6 +209,8 @@ function applyPreferences(preferences) {
   } else {
     console.log("no key of fontSize found in preferences object");
   }
+  // set the values in the preferences panel
+  setPreferencePanelValues(preferences);
 }
 
 ////////////////////////////////////////////////
@@ -258,7 +262,7 @@ function getPreferences(keyName) {
 // Test of the savePreferences Function with testPreferences
 ////////////////////////////////////////////////
 // savePreferences(testPreferences, "testSettings");
-let fetchedSettings = getPreferences("testSettings");
+// let fetchedSettings = getPreferences("testSettings");
 // console.log(fetchedSettings);
 
 /////////////////////////////////////////

@@ -42,6 +42,13 @@ body {
   display: flex;
   align-items: center;
   color: #f7f9fb;
+  display: flex;
+  justify-content: flex-start;
+}
+#logo {
+  height: 50px;
+  width: 200px;
+  padding-left: 10px;
 }
 /*******************************************
                 NAV
