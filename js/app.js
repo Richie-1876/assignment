@@ -28,6 +28,10 @@ let animationSpeedSlider = document.getElementById("animation-speed-slider");
 let animationDurationDisplay = document.getElementById(
   "animation-duration-display"
 );
+// GALLERY SLIDE SHOW ELEMENTS
+var allSlides = document.getElementsByClassName("slides");
+var bullets = document.getElementsByClassName("bullet");
+let slideIdx = 1;
 /////////////////////////////////////////
 //         EVENT LISTENERS
 /////////////////////////////////////////
@@ -62,6 +66,7 @@ prefsResetDefaults.addEventListener("click", () => {
   if (localStorage["defaults"] != null) {
     // apply the preferences to the page
     applyPreferences(getPreferences("defaults"));
+    togglePreferencePanel();
   } else {
     console.log(
       "Cannot reset defaults as no default preferences were found in local storage"
@@ -72,13 +77,16 @@ prefsResetDefaults.addEventListener("click", () => {
 prefsSaveButton.addEventListener("click", () => {
   // let userPreferences = getPreferencePanelValues();
   savePreferences(getPreferencePanelValues(), "userPreferences");
+  togglePreferencePanel();
 });
 
 prefsCancelButton.addEventListener("click", () => {
   if (localStorage["userPreferences"]) {
     applyPreferences(getPreferences("userPreferences"));
+    togglePreferencePanel();
   } else {
     applyPreferences(getPreferences("defaults"));
+    togglePreferencePanel();
   }
 });
 //<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>//
@@ -134,6 +142,9 @@ window.onload = function () {
   // set username display to display whats in local storage
   usernameDisplay.textContent = localStorage.username;
   animationDurationDisplay.innerHTML = `${animationSpeedSlider.value}s`;
+
+  // SHOW FIRST SLIDE
+  showSlides(slideIdx);
 };
 /////////////////////////////////////////
 // Function to save and display Username
@@ -340,4 +351,57 @@ function confirmAtLeast1InterestChecked() {
     }
   }
   return false;
+}
+
+/////////////////////////////////////////
+// Function change slide
+/////////////////////////////////////////
+/****************************************
+ * Name: switchSlides()
+ * Purpose: (for next/prev btns)add to current slide index
+ * Parameters: (1) integer: slide number
+ * Returns: no return value
+ ****************************************/
+function switchSlides(n) {
+  showSlides((slideIdx += n));
+}
+/////////////////////////////////////////
+// Function current slide
+/////////////////////////////////////////
+/****************************************
+ * Name: currSlide()
+ * Purpose: change current slide index to selected slide
+ * Parameters: (1) integer: slide number
+ * Returns: no return value
+ ****************************************/
+// Thumbnail controls
+function currSlide(n) {
+  showSlides((slideIdx = n));
+}
+/////////////////////////////////////////
+// Function show slide
+/////////////////////////////////////////
+/****************************************
+ * Name: showSlides()
+ * Purpose: show selected slide
+ * Parameters: (1) integer: slide number
+ * Returns: no return value
+ ****************************************/
+function showSlides(n) {
+  let i;
+
+  if (n > allSlides.length) {
+    slideIdx = 1;
+  }
+  if (n < 1) {
+    slideIdx = allSlides.length;
+  }
+  for (i = 0; i < allSlides.length; i++) {
+    allSlides[i].style.display = "none";
+  }
+  for (i = 0; i < bullets.length; i++) {
+    bullets[i].className = bullets[i].className.replace(" active", "");
+  }
+  allSlides[slideIdx - 1].style.display = "block";
+  bullets[slideIdx - 1].className += " active";
 }

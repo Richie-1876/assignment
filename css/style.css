@@ -22,6 +22,7 @@ ROOT ELEMENT OF THE DOCUMENT (HTML ELEMENT)
   --border-color2: #31708e;
   --body-color: #31708e;
   --main-nav: #5085a5;
+  --highlight: #ffffff;
   /* FONTS */
   --font1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font2: "Arial";
@@ -138,10 +139,7 @@ Element:first-child is a sudo selector  */
 /*******************************************
                 MAIN CONTENT
 *******************************************/
-/* #wrapper {
-  width: 90%;
-  margin: 0 auto;
-} */
+
 #main-content {
   width: 90%;
   margin: 0 auto;
@@ -152,19 +150,22 @@ Element:first-child is a sudo selector  */
   /* Border example */
   border: 2px solid var(--border-color1);
   /* border radius example */
-  border-radius: 5px;
+  border-radius: 50px;
   /* height: 400px; */
   padding: 20px;
   margin: 20px;
   /* Box shadow example */
-  box-shadow: 10px 5px 5px #31708e;
+  box-shadow: 5px 5px 5px var(--highlight);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
 main section {
-  background-color: var(--border-color2);
+  background-color: var(--main-nav);
+}
+main h2 {
+  text-shadow: 1px 1px 2px #f2f3f4;
 }
 /*******************************************
                 PREF PANEL SECTION
@@ -233,15 +234,15 @@ main section {
 #animation-area {
   width: 99%;
   margin: 0 auto;
-  background-color: #f7f9fb;
+  background-color: var(--header-color1);
   height: 200px;
-  border: 2px solid #31708e;
+  border: 2px solid var(--border-color1);
   position: relative;
 }
 #animation-target {
   height: 20px;
   width: 20px;
-  background-color: #8fc1e3;
+  background-color: var(--highlight);
   position: absolute;
   /* animation: animation1 2s infinite; */
   animation-name: animation1;
@@ -253,11 +254,11 @@ main section {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 2px solid #31708e;
+  border: 2px solid var(--border-color1);
   border-radius: 50px;
   width: 99%;
   height: 50px;
-  background-color: #8fc1e3;
+  background-color: var(--header-color1);
 }
 
 /*******************************************
@@ -282,12 +283,14 @@ main section {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  /* height: 90vh; */
 }
 #youtube-embed,
 #hosted-vid {
   width: 100%;
   height: 100%;
   border-radius: 50px;
+  border: 4px solid var(--border-color1);
 }
 #youtube-video-container,
 #hosted-video-container {
@@ -296,8 +299,141 @@ main section {
   text-align: center;
   justify-content: center;
   width: 80%;
-  height: 500px;
+  height: 33%;
 }
+#youtube-video-container {
+  height: 700px;
+}
+/*******************************************
+          AUDIO SECTION
+*******************************************/
+#audio-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+#audio-img {
+  height: 600px;
+  border-radius: 50px;
+  border: 4px solid var(--border-color1);
+}
+audio {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 50px;
+  border: 4px solid var(--border-color1);
+}
+
+/*******************************************
+          GALLERY SECTION
+*******************************************/
+/* Slideshow container */
+.slideshow-container {
+  width: 80%;
+  position: relative;
+  margin: auto;
+  border: 4px solid var(--border-color1);
+  border-radius: 50px;
+  overflow: hidden;
+  background-color: var(--body-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hide images */
+.slides {
+  display: none;
+}
+
+.slide {
+  margin: 0 auto;
+  width: 100%;
+  height: 700px;
+}
+/* Next & prev buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -23px;
+  padding: 15px;
+  font-weight: bolder;
+  transition: 0.5s ease;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: white;
+}
+
+/* Slide text */
+.text {
+  background-color: #31708e;
+  padding: 8px 12px;
+  position: absolute;
+  opacity: 0.8;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Slide Number indicator(1/5 etc) */
+.slide-number-text {
+  background-color: #31708e;
+  padding: 15px 15px;
+  opacity: 0.8;
+  border: 2px solid var(--border-color1);
+  border-bottom-right-radius: 20px;
+  position: absolute;
+  top: 0;
+}
+
+.bullet {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  margin: 0 2px;
+  background-color: var(--border-color1);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.4s ease;
+}
+
+.active,
+.bullet:hover {
+  background-color: var(--body-color);
+}
+
+/* Fade-effect animation */
+.fade-effect {
+  animation-name: fade-effect;
+  animation-duration: 1.5s;
+}
+
+/*******************************************
+         GALLERY ANIMATION KEYFRAMES
+*******************************************/
+@keyframes fade-effect {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /*******************************************
           CONTACT FORM SECTION
 *******************************************/
@@ -313,15 +449,19 @@ input[type="number"],
 input[type="date"] {
   background-color: inherit;
   border: none;
-  border-bottom: 1px solid #31708e;
+  border-bottom: 1px solid var(--border-color1);
+  width: 250px;
 }
 #contact-form {
+  display: flex;
+  justify-content: space-around;
   height: 90%;
   width: 85%;
   padding: 10px;
-  border: 2px solid #31708e;
-  border-radius: 10px;
-  background-color: #8fc1e3;
+  border: 4px solid var(--border-color1);
+  border-radius: 50px;
+  background-color: var(--body-color);
+  font-weight: 500;
 }
 #contact-form table td {
   padding: 8px;
@@ -331,14 +471,21 @@ input[type="date"] {
 }
 #form-btns {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .contact-btns {
-  width: 40%;
-  height: 25px;
+  width: 140px;
+  height: 50px;
   border-radius: 10px;
   box-shadow: 1px 1px 1px grey;
 }
+textarea {
+  width: 250px;
+  height: 100px;
+  background-color: #8fc1e3;
+}
+
 #submit-btn {
   background-color: green;
   color: #f7f9fb;
@@ -356,6 +503,24 @@ input[type="date"] {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+#map-container {
+  width: 80%;
+  border: 4px solid var(--border-color1);
+  border-radius: 50px;
+  background-color: #31708e;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+#map {
+  margin: 0 auto;
+}
+#map-container > iframe {
+  border-top-left-radius: 51px;
+  border-top-right-radius: 51px;
+  border: 4px solid var(--border-color1);
+  margin: 0 auto;
 }
 /*******************************************
                 FOOTER
@@ -380,6 +545,28 @@ input[type="date"] {
   #main-content {
     width: 98%;
   }
+  #youtube-video-container {
+    height: 500px;
+  }
+  #hosted-video-container {
+    height: 50%;
+  }
+  #contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #contact-form > table {
+    margin: 0 auto;
+  }
+  #form-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  #audio-img {
+    height: 400px;
+  }
   #nav-left ul li:first-child {
     display: block;
   }
@@ -393,6 +580,10 @@ input[type="date"] {
   #main-content {
     width: 100%;
   }
+  #youtube-video-container {
+    height: 300px;
+  }
+
   /* Display burger menu */
   #nav-left ul li:first-child {
     display: block;
